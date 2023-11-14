@@ -1,0 +1,32 @@
+# version: '3.1'
+# services:
+#   db:
+#     image: postgres:13
+#     restart: always
+#     env_file:
+#       - .env
+#     volumes:
+#       - ./dataset:/docker-entrypoint-initdb.d
+#     ports:
+#       - 5432:5432
+version: '3.7'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: app
+    ports:
+      - 3000:3000
+    env_file:
+      - ./.env
+  nest_db:
+    image: postgres:13.3
+    container_name: nest_db
+    ports:
+      - '5432:5432'
+    env_file:
+      - ./.env
+    volumes:
+      - ./dataset:/docker-entrypoint-initdb.d
+      - ./docker/db:/var/lib/postgresql/data
