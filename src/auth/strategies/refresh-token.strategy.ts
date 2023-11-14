@@ -1,15 +1,13 @@
 import { Strategy, ExtractJwt } from 'passport-jwt';
 import { PassportStrategy } from '@nestjs/passport';
-import { AuthService } from '../auth.service';
 import { Injectable } from '@nestjs/common';
-import { User } from 'src/user/entity/user.entity';
 
 @Injectable()
 export class RefreshJwtStrategy extends PassportStrategy(
   Strategy,
   'jwt-refresh',
 ) {
-  constructor(private authService: AuthService) {
+  constructor() {
     super({
       jwtFromRequest: ExtractJwt.fromBodyField('refresh'),
       ignoreExpiration: false,
@@ -18,6 +16,6 @@ export class RefreshJwtStrategy extends PassportStrategy(
   }
 
   async validate(payload) {
-    return payload
+    return payload;
   }
 }

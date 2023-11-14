@@ -1,21 +1,9 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Request,
-  Body,
-  UseGuards,
-} from '@nestjs/common';
-import { AuthService } from './auth.service';
+import { Controller, Post, Request, Body, UseGuards } from '@nestjs/common';
+import { AuthService } from './services/auth.service';
 import { AuthResultDto } from './dto/AuthResultDto.dto';
 import { RefreshJwtGuard } from './guards/refresh-jwt.guard';
 import { LocalGuard } from './guards/local.guard';
-import { JwtGuard } from './guards/jwt.guard';
-
-export interface ILogin {
-  email: string;
-  password: string;
-}
+import { ILogin } from './dto/login.interface';
 
 @Controller('auth')
 export class AuthController {

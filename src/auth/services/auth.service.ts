@@ -1,9 +1,9 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { User } from 'src/user/entity/user.entity';
 import { UserService } from 'src/user/services/user.service';
-import { AuthResultDto } from './dto/AuthResultDto.dto';
-import { ILogin } from './auth.controller';
+import { AuthResultDto } from '../dto/AuthResultDto.dto';
+import { ILogin } from '../dto/login.interface';
 
 @Injectable()
 export class AuthService {
@@ -26,7 +26,7 @@ export class AuthService {
   }
 
   async refreshToken(user) {
-    const payload = { id: user.id, email: user.email};
+    const payload = { id: user.id, email: user.email };
     return {
       accessToken: this.jwtService.sign(payload),
     };
